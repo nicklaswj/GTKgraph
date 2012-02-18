@@ -11,6 +11,8 @@ protected:
 	Gtk::Box *upperBox;
 	Gtk::Box *lowerBox;
 	Gtk::Box *toolbarBox;
+	
+	Gtk::Alignment *commandAlign;
 
 	Gtk::Entry *commandLine;
 	

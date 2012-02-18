@@ -8,6 +8,7 @@ mainWindow::mainWindow()
 	lowerBox = new Gtk::Box();
 	toolbarBox = new Gtk::Box();
 	eqPaned = new Gtk::HPaned();
+	commandAlign = new Gtk::Alignment();
 	
 	test1 = new Gtk::Button();
 	test2 = new Gtk::Button();
@@ -16,6 +17,7 @@ mainWindow::mainWindow()
 	
 	
 	//init commandline
+	commandAlign->set_padding(0,0,0,15);
 	commandLine = new Gtk::Entry();
 	
 	//initial the window
@@ -71,7 +73,7 @@ mainWindow::mainWindow()
 	mainBox->pack_start(*lowerBox, false, false, 0);
 	
 	upperBox->pack_start(*eqPaned);
-	lowerBox->pack_start(*commandLine);
+	lowerBox->pack_start(*commandLine, true, true, 10);
 	
 	
 	//add and show children
