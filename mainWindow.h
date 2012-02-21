@@ -10,7 +10,7 @@ protected:
 	Gtk::Box *mainBox;
 	Gtk::Box *upperBox;
 	Gtk::Box *lowerBox;
-	Gtk::Box *toolbarBox;
+	Gtk::VBox *toolbarBox;
 	
 	Gtk::Alignment *commandAlign;
 

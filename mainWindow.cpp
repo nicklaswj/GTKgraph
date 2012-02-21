@@ -6,7 +6,7 @@ mainWindow::mainWindow()
 	mainBox = new Gtk::Box(Gtk::ORIENTATION_VERTICAL,0);
 	upperBox = new Gtk::Box();
 	lowerBox = new Gtk::Box();
-	toolbarBox = new Gtk::Box();
+	toolbarBox = new Gtk::VBox();
 	eqPaned = new Gtk::HPaned();
 	commandAlign = new Gtk::Alignment();
 	
@@ -50,6 +50,9 @@ mainWindow::mainWindow()
 		"			<menuitem action='FileQuit'/>"
 		"		</menu>"
 		"	</menubar>"
+		"	<toolbar name='ToolBar'>"
+		"		<toolitem action='FileOpen'/>"
+		"	</toolbar>"
 		"</ui>";
 		
 	try
@@ -66,6 +69,11 @@ mainWindow::mainWindow()
 	
 	if(MenuBar)
 		toolbarBox->pack_start(*MenuBar, Gtk::PACK_SHRINK);
+	
+	Gtk::Widget *toolBar = refUIManager->get_widget("/ToolBar");
+	
+	if(toolBar)
+		toolbarBox->pack_start(*toolBar, Gtk::PACK_SHRINK);
 	
 	//Pack the upper and lower box
 	mainBox->pack_start(*toolbarBox, false, false, 0);
