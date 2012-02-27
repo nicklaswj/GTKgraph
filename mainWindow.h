@@ -1,5 +1,6 @@
 #include <gtkmm.h>
 #include <iostream>
+#include <eqTreeView.h>
 
 class mainWindow : public Gtk::Window
 {
