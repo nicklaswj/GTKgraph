@@ -1,4 +1,4 @@
-OBJ = main.o mainWindow.o
+OBJ = main.o mainWindow.o eqTreeView.o
 CPPFLAGS = `pkg-config gtkmm-3.0 --cflags --libs`
 CXX = g++
 

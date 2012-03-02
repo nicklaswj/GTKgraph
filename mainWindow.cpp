@@ -10,15 +10,18 @@ mainWindow::mainWindow()
 	eqPaned = new Gtk::HPaned();
 	commandAlign = new Gtk::Alignment();
 	
+	eqView = new eqTreeView();
+	
 	test1 = new Gtk::Button();
 	test2 = new Gtk::Button();
-	eqPaned->add1(*test1);
+	eqPaned->add1(*eqView);
 	eqPaned->add2(*test2);
 	
 	
 	//init commandline
 	commandAlign->set_padding(0,0,0,15);
 	commandLine = new Gtk::Entry();
+	commandAlign->add(*commandLine);
 	
 	//initial the window
 	set_border_width(0);
@@ -81,7 +84,8 @@ mainWindow::mainWindow()
 	mainBox->pack_start(*lowerBox, false, false, 0);
 	
 	upperBox->pack_start(*eqPaned);
-	lowerBox->pack_start(*commandLine, true, true, 10);
+	
+	lowerBox->pack_start(*commandAlign, true, true, 0);
 	
 	
 	//add and show children

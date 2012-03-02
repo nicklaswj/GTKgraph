@@ -19,11 +19,11 @@ protected:
 		Gtk::TreeModelColumn<bool> eqEnabled;
  		Gtk::TreeModelColumn<Glib::ustring> eqName;
 		Gtk::TreeModelColumn<Glib::ustring> eqString;
-	}
+	};
 	
 	eqTreeViewCol Cols;
 	
-	Glib::RefPtr<Gtk::TreeStore> refTreeModel
+	Glib::RefPtr<Gtk::TreeStore> refTreeModel;
 	
-}
+};
 

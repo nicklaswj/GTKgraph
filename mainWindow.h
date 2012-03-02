@@ -1,6 +1,6 @@
 #include <gtkmm.h>
 #include <iostream>
-#include <eqTreeView.h>
+#include "eqTreeView.h"
 
 class mainWindow : public Gtk::Window
 {
@@ -18,6 +18,8 @@ protected:
 	Gtk::Entry *commandLine;
 	
 	Gtk::HPaned *eqPaned;
+	eqTreeView *eqView;
+	
 	Gtk::Button *test1;
 	Gtk::Button *test2;
 	
