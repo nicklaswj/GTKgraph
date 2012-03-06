@@ -29,4 +29,5 @@ protected:
 
 	void quitWindow();
 	void openSaved();
+	bool commandLineKeyPress(GdkEventKey*);
 };

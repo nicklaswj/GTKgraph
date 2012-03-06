@@ -87,9 +87,11 @@ mainWindow::mainWindow()
 	
 	lowerBox->pack_start(*commandAlign, true, true, 0);
 	
+	//Connect signals
+	commandLine->signal_key_press_event().connect(sigc::mem_fun(*this, &mainWindow::commandLineKeyPress), false);
+	
 	
 	//add and show children
-	
 	add(*mainBox);
 	show_all_children();
 }
@@ -105,4 +107,18 @@ void mainWindow::quitWindow()
 
 void mainWindow::openSaved()
 {
+}
+
+bool mainWindow::commandLineKeyPress(GdkEventKey* event)
+{
+	switch(event->keyval)
+	{
+		case GDK_KEY_Return:
+			Gtk::MessageDialog dialog(*this, "Enter trykket");
+
+			dialog.run();
+			return true;
+			break;
+	}
+	return false;
 }
