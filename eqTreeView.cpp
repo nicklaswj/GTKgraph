@@ -10,3 +10,12 @@ eqTreeView::eqTreeView(){
 	this->append_column("Name", Cols.eqName);
 	this-append_column("String", Cols.eqString);
 } 
+
+eqTreeView::addRow(bool Tchecked, Glib::ustring Tname, Glib::ustring Tstring)
+{
+}
+
+eqTreeView::addRow(Glib::ustring Tname, Glib::ustring Tstring)
+{
+	this->addRow(true, Tname, Tstring);
+}

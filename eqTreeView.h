@@ -4,6 +4,8 @@ class eqTreeView : public Gtk::TreeView
 {
 public:
 	eqTreeView(void);
+	addRow(bool Tchecked, Glib::ustring Tname, Glib::ustring Tstring);
+	addRow(Glib::ustring Tname, Glib::ustring Tstring);
 private:
 protected:
 	class eqTreeViewCol : public Gtk::TreeModel::ColumnRecord 
