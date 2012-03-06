@@ -1,0 +1,4 @@
+class eqautionHandler
+{
+	public:
+}
