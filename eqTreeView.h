@@ -9,6 +9,8 @@ public:
 	Gtk::TreeModel::Row addRow(Glib::ustring Tname, Glib::ustring Tstring);
 	
 	void addEquation(equation *eq);
+	
+	void removeSelected();
 private:
 protected:
 	class eqTreeViewCol : public Gtk::TreeModel::ColumnRecord 
@@ -31,6 +33,16 @@ protected:
 	eqTreeViewCol Cols;
 	
 	Glib::RefPtr<Gtk::TreeStore> refTreeModel;
+	
+	//pointer for the rightClick menu
+	Glib::RefPtr<Gtk::UIManager> menuUIManager;
+	Glib::RefPtr<Gtk::ActionGroup> menuActionGroup;
+	
+	Gtk::Menu* menuPopup;
+	
+	void eqClicked(GdkEventButton* event);
+	
+	void slotDeleteEquation();
 	
 };
 
