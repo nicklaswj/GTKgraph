@@ -114,11 +114,71 @@ bool mainWindow::commandLineKeyPress(GdkEventKey* event)
 	switch(event->keyval)
 	{
 		case GDK_KEY_Return:
-			Gtk::MessageDialog dialog(*this, "Enter trykket");
-
-			dialog.run();
+			
+			equation *tmp = this->createEqFromStr(commandLine->get_text());
+			
+			if(tmp != 0)
+			{
+				eqView->addEquation(tmp);
+			}
+			
 			return true;
 			break;
 	}
 	return false;
+}
+
+equation* mainWindow::createEqFromStr(Glib::ustring str)
+{
+	Gtk::MessageDialog tempDialog(*this, "Error!");
+	unsigned int equalPos = commandLine->get_text().find("=");
+	
+	//check for = sign else give a error
+	if(equalPos > 2000000000)
+	{
+		tempDialog.set_secondary_text("No \"=\" found");
+		tempDialog.run();
+		return 0;
+	}else{
+		//Now substring the str form equalPos
+		Glib::ustring leftSide = str.substr(0, equalPos);
+		
+		//now find the function variable
+		unsigned firstBrace = leftSide.find("(");
+		//if this is zero, no function name is given.
+		if(firstBrace == 0)
+		{
+			tempDialog.set_secondary_text("No function name is given");
+			tempDialog.run();
+			return 0;
+		}else{
+			//if ( is not found error
+			if(firstBrace > 2000000000)
+			{
+				tempDialog.set_secondary_text("Missing \"(\" in function name");
+				tempDialog.run();
+				return 0;
+			}
+			
+			
+			Glib::ustring afterBrace = leftSide.substr(firstBrace);
+			if(afterBrace.length() != 3)
+			{
+				tempDialog.set_secondary_text("Syntax error in variable name");
+				tempDialog.run();
+				return 0;
+			}
+			
+			Glib::ustring variableName = afterBrace.substr(1,1);
+			Glib::ustring functionName = leftSide.substr(0, firstBrace);
+			
+			Glib::ustring rightSide = str.substr(equalPos+1);
+			
+			equation *tempEq = new equation();
+			tempEq->setName(functionName);
+			tempEq->setEquation(rightSide);
+			tempEq->setVariable(variableName);
+			return tempEq;
+		}
+	}
 }

@@ -30,4 +30,7 @@ protected:
 	void quitWindow();
 	void openSaved();
 	bool commandLineKeyPress(GdkEventKey*);
+	
+private:
+	equation* createEqFromStr(Glib::ustring str);
 };
