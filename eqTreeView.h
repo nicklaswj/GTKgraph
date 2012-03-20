@@ -11,6 +11,7 @@ public:
 	void addEquation(equation *eq);
 	
 	void removeSelected();
+	bool removeByName(Glib::ustring name);
 private:
 protected:
 	class eqTreeViewCol : public Gtk::TreeModel::ColumnRecord 

@@ -8,9 +8,17 @@ equation::~equation()
 {
 }
 
-void equation::setEquation(Glib::ustring eqString)
+bool equation::setEquation(Glib::ustring eqString)
 {
+	//keep the original expression
 	this->equationString = eqString;
+	
+	//vector<
+	
+	for(int i = 0; i < eqString.length(); i++)
+	{
+		
+	}
 }
 int equation::getYFromX(float x)
 {

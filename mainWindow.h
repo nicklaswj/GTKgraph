@@ -1,6 +1,12 @@
 #include <gtkmm.h>
 #include <iostream>
 #include "eqTreeView.h"
+#include <vector>
+
+#define FUNC_NOT_FOUND		0
+#define SYNTAX_ERROR		1
+#define FUNC_HANDLED		2
+
 
 class mainWindow : public Gtk::Window
 {
@@ -33,4 +39,5 @@ protected:
 	
 private:
 	equation* createEqFromStr(Glib::ustring str);
+	int callFunc(Glib::ustring str);
 };

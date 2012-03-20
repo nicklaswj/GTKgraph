@@ -117,3 +117,22 @@ void eqTreeView::removeSelected()
 	
 	refTreeModel->erase(selectionRef->get_selected());
 }
+
+bool eqTreeView::removeByName(Glib::ustring name)
+{
+	Gtk::TreeModel::Children children = this->refTreeModel->children();
+	
+	for(Gtk::TreeModel::Children::iterator iter = children.begin(); iter != children.end(); ++iter){
+		Gtk::TreeModel::Row row = *iter;
+		equation *tmp = row[this->Cols.equationPrt];
+		
+		if(tmp->getName() == name)
+		{
+			delete(tmp);
+			
+			this->refTreeModel->erase(row);
+			return true;
+		}
+	}
+	return false;
+}

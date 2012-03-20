@@ -115,17 +115,61 @@ bool mainWindow::commandLineKeyPress(GdkEventKey* event)
 	{
 		case GDK_KEY_Return:
 			
-			equation *tmp = this->createEqFromStr(commandLine->get_text());
-			
-			if(tmp != 0)
+			if(callFunc(commandLine->get_text()) == FUNC_NOT_FOUND)
 			{
-				eqView->addEquation(tmp);
+				equation *tmp = this->createEqFromStr(commandLine->get_text());
+			
+				if(tmp != 0)
+				{
+					eqView->addEquation(tmp);
+				}
 			}
 			
 			return true;
 			break;
 	}
 	return false;
+}
+
+int mainWindow::callFunc(Glib::ustring str)
+{
+	Gtk::MessageDialog tempDialog(*this, "Error!");
+	unsigned int leftBrace = str.find("(");
+	unsigned int rightBrace = str.find(")");
+	
+	if(leftBrace > 2000000000)
+	{
+		tempDialog.set_secondary_text("Missing \"(\"");
+		tempDialog.run();
+		return SYNTAX_ERROR;
+	}else if(rightBrace > 2000000000){
+		tempDialog.set_secondary_text("Missing \")\"");
+		tempDialog.run();
+		return SYNTAX_ERROR;
+	}else if(leftBrace > rightBrace){
+		tempDialog.set_secondary_text("Syntax error near )");
+		tempDialog.run();
+		return SYNTAX_ERROR;
+	}else if(leftBrace == 0){
+		tempDialog.set_secondary_text("No function name given");
+		tempDialog.run();
+		return SYNTAX_ERROR;
+	}else{
+		Glib::ustring funcName = str.substr(0, leftBrace);
+		Glib::ustring rawArg = str.substr(leftBrace+1, 1);
+		
+		if(funcName == "del")
+		{
+			if(this->eqView->removeByName(rawArg) == false)
+			{
+				tempDialog.set_secondary_text("No funtion to delete");
+				tempDialog.run();
+			}
+			return FUNC_HANDLED;
+		}else{
+			return FUNC_NOT_FOUND;
+		}
+	}
 }
 
 equation* mainWindow::createEqFromStr(Glib::ustring str)
@@ -144,7 +188,7 @@ equation* mainWindow::createEqFromStr(Glib::ustring str)
 		Glib::ustring leftSide = str.substr(0, equalPos);
 		
 		//now find the function variable
-		unsigned firstBrace = leftSide.find("(");
+		unsigned int firstBrace = leftSide.find("(");
 		//if this is zero, no function name is given.
 		if(firstBrace == 0)
 		{
