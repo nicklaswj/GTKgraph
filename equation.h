@@ -1,18 +1,7 @@
 #include <gtkmm.h>
 #include <iostream>
+#include <muParser.h>
 
-
-#define isNumber(x)	(x >= "0" && x <= "9")
-#define isOperator(x)	(x == '*' || x == '/' || x == '^' || x == '-'  || x == '+')
-
-#define LEFT	1
-#define RIGHT	2
-
-typedef struct calcItem {
-	unsigned char type;
-	long double number;
-	unsigned char operation;
-} calcItem;
 
 class equation
 {
@@ -21,10 +10,8 @@ private:
 	Glib::ustring equationString;
 	Glib::ustring funcName;
 	Glib::ustring variableName;
-	Glib::ustring RPN;
 	
-	int pO(Glib::ustring oper);
-	int opAssoc(Glib::ustring oper);
+	double variable;
 	
 	//vector<calcItem> operationList;
 	//vector<double long> sumList;
