@@ -2,6 +2,12 @@
 #include <iostream>
 
 
+#define isNumber(x)	(x >= "0" && x <= "9")
+#define isOperator(x)	(x == '*' || x == '/' || x == '^' || x == '-'  || x == '+')
+
+#define LEFT	1
+#define RIGHT	2
+
 typedef struct calcItem {
 	unsigned char type;
 	long double number;
@@ -15,6 +21,10 @@ private:
 	Glib::ustring equationString;
 	Glib::ustring funcName;
 	Glib::ustring variableName;
+	Glib::ustring RPN;
+	
+	int pO(Glib::ustring oper);
+	int opAssoc(Glib::ustring oper);
 	
 	//vector<calcItem> operationList;
 	//vector<double long> sumList;
