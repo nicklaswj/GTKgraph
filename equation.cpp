@@ -2,6 +2,7 @@
 
 equation::equation()
 {
+	eqParser = new mu::Parser();
 }
 
 equation::~equation()
@@ -12,13 +13,13 @@ bool equation::setEquation(Glib::ustring eqString)
 {
 	//keep the original expression
 	this->equationString = eqString;
+	this->eqParser->SetExpr(eqString);
 	
 }
-int equation::getYFromX(float x)
+double equation::getYFromX(double x)
 {
-	int y;
-	
-	return y;
+	this->variable = x;
+	return this->eqParser->Eval();
 }
 
 void equation::setName(Glib::ustring name)
@@ -29,6 +30,7 @@ void equation::setName(Glib::ustring name)
 void equation::setVariable(Glib::ustring name)
 {
 	this->variableName = name;
+	this->eqParser->DefineVar(name, &variable);
 }
 
 Glib::ustring equation::getName(){

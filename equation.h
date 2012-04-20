@@ -13,6 +13,8 @@ private:
 	
 	double variable;
 	
+	mu::Parser *eqParser;
+	
 	//vector<calcItem> operationList;
 	//vector<double long> sumList;
 public:
@@ -20,7 +22,7 @@ public:
 	~equation();
 	
 	bool setEquation(Glib::ustring eqString);
-	int getYFromX(float x);
+	double getYFromX(double x);
 	void setName(Glib::ustring name);
 	void setVariable(Glib::ustring name);
 	

@@ -12,6 +12,7 @@ public:
 	
 	void removeSelected();
 	bool removeByName(Glib::ustring name);
+	equation* getEqByName(Glib::ustring name);
 private:
 protected:
 	class eqTreeViewCol : public Gtk::TreeModel::ColumnRecord 

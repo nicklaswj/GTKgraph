@@ -156,7 +156,7 @@ int mainWindow::callFunc(Glib::ustring str)
 		return SYNTAX_ERROR;
 	}else{
 		Glib::ustring funcName = str.substr(0, leftBrace);
-		Glib::ustring rawArg = str.substr(leftBrace+1, 1);
+		Glib::ustring rawArg = str.substr(leftBrace+1, rightBrace);
 		
 		if(funcName == "del")
 		{
@@ -167,7 +167,16 @@ int mainWindow::callFunc(Glib::ustring str)
 			}
 			return FUNC_HANDLED;
 		}else{
-			return FUNC_NOT_FOUND;
+			if(this->eqView->getEqByName(funcName))
+			{
+				equation *tmpEq = this->eqView->getEqByName(funcName);
+				double number = strtod(rawArg.c_str(),NULL);
+				number = tmpEq->getYFromX(number);
+				printf("%f", number);
+				
+			}else{
+				return FUNC_NOT_FOUND;
+			}
 		}
 	}
 }
