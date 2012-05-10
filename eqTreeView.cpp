@@ -98,6 +98,7 @@ void eqTreeView::eqClicked(GdkEventButton* event)
 	if((event->type == GDK_BUTTON_PRESS) && (event->button == 3)){
 		menuPopup->popup(event->button, event->time);
 	}else{
+		
 	}
 }
 
@@ -146,7 +147,10 @@ std::vector<equation*> eqTreeView::getEquations()
 		Gtk::TreeModel::Row row = *iter;
 		equation *tmp = row[this->Cols.equationPrt];
 		
-		eqVector.push_back(tmp);
+		if(row[this->Cols.eqEnabled] == true)
+		{
+			eqVector.push_back(tmp);
+		}
 	}
 	return eqVector;
 }
