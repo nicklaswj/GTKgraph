@@ -1,5 +1,6 @@
 #include <gtkmm.h>
 #include "equation.h"
+#include <vector>
 
 class eqTreeView : public Gtk::TreeView
 {
@@ -13,6 +14,9 @@ public:
 	void removeSelected();
 	bool removeByName(Glib::ustring name);
 	equation* getEqByName(Glib::ustring name);
+	Glib::RefPtr<Gtk::TreeStore> refTreeModel;
+	std::vector<equation*> getEquations();
+	
 private:
 protected:
 	class eqTreeViewCol : public Gtk::TreeModel::ColumnRecord 
@@ -33,8 +37,6 @@ protected:
 	};
 	
 	eqTreeViewCol Cols;
-	
-	Glib::RefPtr<Gtk::TreeStore> refTreeModel;
 	
 	//pointer for the rightClick menu
 	Glib::RefPtr<Gtk::UIManager> menuUIManager;

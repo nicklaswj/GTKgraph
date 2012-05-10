@@ -9,13 +9,15 @@ mainWindow::mainWindow()
 	toolbarBox = new Gtk::VBox();
 	eqPaned = new Gtk::HPaned();
 	commandAlign = new Gtk::Alignment();
-	
 	eqView = new eqTreeView();
+	gV = new graphView();
+	gV->setTree(eqView);
+	
 	
 	test1 = new Gtk::Button();
 	test2 = new Gtk::Button();
 	eqPaned->add1(*eqView);
-	eqPaned->add2(*test2);
+	eqPaned->add2(*gV);
 	
 	
 	//init commandline
@@ -122,6 +124,7 @@ bool mainWindow::commandLineKeyPress(GdkEventKey* event)
 				if(tmp != 0)
 				{
 					eqView->addEquation(tmp);
+					gV->redraw();
 				}
 			}
 			
@@ -156,13 +159,13 @@ int mainWindow::callFunc(Glib::ustring str)
 		return SYNTAX_ERROR;
 	}else{
 		Glib::ustring funcName = str.substr(0, leftBrace);
-		Glib::ustring rawArg = str.substr(leftBrace+1, rightBrace);
+		Glib::ustring rawArg = str.substr(leftBrace+1, rightBrace-leftBrace-1);
 		
 		if(funcName == "del")
 		{
 			if(this->eqView->removeByName(rawArg) == false)
 			{
-				tempDialog.set_secondary_text("No funtion to delete");
+				tempDialog.set_secondary_text("No function by that name!");
 				tempDialog.run();
 			}
 			return FUNC_HANDLED;
@@ -172,7 +175,10 @@ int mainWindow::callFunc(Glib::ustring str)
 				equation *tmpEq = this->eqView->getEqByName(funcName);
 				double number = strtod(rawArg.c_str(),NULL);
 				number = tmpEq->getYFromX(number);
-				printf("%f", number);
+				char buffer[600];
+				sprintf(buffer,"%f",number);
+				tempDialog.set_secondary_text(buffer);
+				tempDialog.run();
 				
 			}else{
 				return FUNC_NOT_FOUND;

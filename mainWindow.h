@@ -1,7 +1,7 @@
 #include <gtkmm.h>
 #include <iostream>
-#include "eqTreeView.h"
 #include <vector>
+#include "graphView.h"
 
 #define FUNC_NOT_FOUND		0
 #define SYNTAX_ERROR		1
@@ -36,6 +36,7 @@ protected:
 	void quitWindow();
 	void openSaved();
 	bool commandLineKeyPress(GdkEventKey*);
+	graphView *gV;
 	
 private:
 	equation* createEqFromStr(Glib::ustring str);

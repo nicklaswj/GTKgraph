@@ -137,6 +137,20 @@ bool eqTreeView::removeByName(Glib::ustring name)
 	return false;
 }
 
+std::vector<equation*> eqTreeView::getEquations()
+{
+	Gtk::TreeModel::Children children = this->refTreeModel->children();
+	std::vector<equation*> eqVector;
+	
+	for(Gtk::TreeModel::Children::iterator iter = children.begin(); iter != children.end(); ++iter){
+		Gtk::TreeModel::Row row = *iter;
+		equation *tmp = row[this->Cols.equationPrt];
+		
+		eqVector.push_back(tmp);
+	}
+	return eqVector;
+}
+
 equation* eqTreeView::getEqByName(Glib::ustring name)
 {
 	Gtk::TreeModel::Children children = this->refTreeModel->children();
