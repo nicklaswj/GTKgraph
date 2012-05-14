@@ -92,6 +92,8 @@ mainWindow::mainWindow()
 	//Connect signals
 	commandLine->signal_key_press_event().connect(sigc::mem_fun(*this, &mainWindow::commandLineKeyPress), false);
 	
+	eqView->signal_checkedChange().connect(sigc::mem_fun(gV, &graphView::redraw) );
+	
 	
 	//add and show children
 	add(*mainBox);

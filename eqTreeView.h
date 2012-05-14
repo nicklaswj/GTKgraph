@@ -1,9 +1,14 @@
 #include <gtkmm.h>
 #include "equation.h"
 #include <vector>
+#include <sigc++/sigc++.h>
 
 class eqTreeView : public Gtk::TreeView
 {
+protected:
+	typedef sigc::signal<void> voidSignal;
+	voidSignal checkedChange;
+	
 public:
 	eqTreeView(void);
 	Gtk::TreeModel::Row addRow(bool Tchecked, Glib::ustring Tname, Glib::ustring Tstring);
@@ -17,7 +22,7 @@ public:
 	Glib::RefPtr<Gtk::TreeStore> refTreeModel;
 	std::vector<equation*> getEquations();
 	
-private:
+	eqTreeView::voidSignal signal_checkedChange();
 protected:
 	class eqTreeViewCol : public Gtk::TreeModel::ColumnRecord 
 	{

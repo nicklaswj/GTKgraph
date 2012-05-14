@@ -1,6 +1,10 @@
 #include "eqTreeView.h"
 #include <iostream>
 
+eqTreeView::voidSignal eqTreeView::signal_checkedChange()
+{
+	return checkedChange;
+}
 
 eqTreeView::eqTreeView(){
 	//create treeView model
@@ -97,8 +101,8 @@ void eqTreeView::eqClicked(GdkEventButton* event)
 	std::cerr << event->button;
 	if((event->type == GDK_BUTTON_PRESS) && (event->button == 3)){
 		menuPopup->popup(event->button, event->time);
-	}else{
-		
+	}else if(event->type == GDK_BUTTON_PRESS && event->button == 1){
+		this->checkedChange.emit();
 	}
 }
 
